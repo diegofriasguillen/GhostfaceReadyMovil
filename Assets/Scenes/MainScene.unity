@@ -202,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 10
+  powerUpSound: {fileID: 8300000, guid: 080fb8acda94ac047930d6f00f9980a0, type: 3}
+  maxVolume: 0.3
 --- !u!61 &14882795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1608,8 +1610,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a10d197973712f40a8f32ce612455ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 2
-  duration: 10
+  speedMultiplier: 1.5
+  duration: 8
+  powerUpSound: {fileID: 8300000, guid: 76b630cbfd136b04c91c90d0fbca57e5, type: 3}
+  maxVolume: 0.05
 --- !u!61 &341165301
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1876,6 +1880,7 @@ MonoBehaviour:
     m_Bits: 64
   attackPoint: {fileID: 2040469011}
   attackRange: 1.2
+  attackCooldown: 0.5
   maxJumps: 1
   wallLayer:
     serializedVersion: 2
@@ -1893,7 +1898,6 @@ MonoBehaviour:
   Level2: {fileID: 1606041181}
   RespawnPoint: {fileID: 103211295}
   camerasObjectLevel1: {fileID: 1872523088}
-  camerasObjectLevel2: {fileID: 743018650}
   startGameSound: {fileID: 8300000, guid: 950007f358cdab6488650b523e05947a, type: 3}
   loseCanvas: {fileID: 767106283}
 --- !u!212 &341712598
@@ -1957,7 +1961,7 @@ Transform:
   m_GameObject: {fileID: 341712593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.27, y: -6.23, z: 0}
+  m_LocalPosition: {x: -39.11, y: -6.23, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2166,7 +2170,7 @@ Transform:
   m_GameObject: {fileID: 343260991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.52, y: 9.25, z: 0.7790017}
+  m_LocalPosition: {x: -11.61, y: 9.214, z: 0.7790017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2236,6 +2240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca32283a660d7b4dbc4a9ddbeef4db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpSound: {fileID: 8300000, guid: bbd5c01ca6e4b5e4b8cd0d58ae475de1, type: 3}
+  soundDuration: 3.5
+  maxVolume: 0.3
 --- !u!61 &343260995
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2331,7 +2338,7 @@ Transform:
   m_GameObject: {fileID: 354493701}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.684528, y: 9.236001, z: 0.7790017}
+  m_LocalPosition: {x: -9.67, y: 9.26, z: 0.7790017}
   m_LocalScale: {x: 1.76, y: 1.76, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2402,6 +2409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 10
+  powerUpSound: {fileID: 8300000, guid: 080fb8acda94ac047930d6f00f9980a0, type: 3}
+  maxVolume: 0.3
 --- !u!61 &354493705
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2497,7 +2506,7 @@ Transform:
   m_GameObject: {fileID: 406807157}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.51, y: -17.48, z: 0.48916566}
+  m_LocalPosition: {x: 2.51, y: -17.59, z: 0.48916566}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2524,6 +2533,9 @@ MonoBehaviour:
   dashPowerUpChance: 1
   immortalityPowerUpChance: 0
   inmortalityPowerUpPrefab: {fileID: 354493701}
+  deathSound: {fileID: 8300000, guid: 73dee6c65e8a6634b9097d288a5eeea6, type: 3}
+  soundDuration: 2
+  maxVolume: 0.2
 --- !u!61 &406807160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3277,6 +3289,9 @@ MonoBehaviour:
   throwInterval: 2.75
   lives: 4
   detectionRange: 8
+  deathSound: {fileID: 0}
+  soundDuration: 3.5
+  maxVolume: 0.2
 --- !u!95 &479926923
 Animator:
   serializedVersion: 5
@@ -3744,7 +3759,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.442667, y: -5.845094, z: -10}
+  m_LocalPosition: {x: -17.446135, y: -5.845094, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4438,6 +4453,9 @@ MonoBehaviour:
   powerUpOffset: {x: 0, y: 2, z: 0}
   shootSound: {fileID: 8300000, guid: c796c48d1008cd447a5f59f20c9a498c, type: 3}
   shootVolume: 0.1
+  deathSound: {fileID: 8300000, guid: 6f866fa4489940b4a871987da1b89261, type: 3}
+  soundDuration: 2
+  maxVolume: 0.1
 --- !u!61 &692097665
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5535,6 +5553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseButton: {fileID: 1356518586}
   pauseMenu: {fileID: 1411403868}
+  patrols:
+  - {fileID: 1409335575}
 --- !u!1 &878917126
 GameObject:
   m_ObjectHideFlags: 3
@@ -5900,7 +5920,7 @@ Transform:
   m_GameObject: {fileID: 915635830}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.849529, y: 9.189675, z: 0.7790017}
+  m_LocalPosition: {x: -8.86, y: 9.21, z: 0.7790017}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5918,6 +5938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990eb9b8d1de2fc4f9dd93c13e9caf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeUpSound: {fileID: 8300000, guid: faba2cf3c7827704e983ea4eb0399c90, type: 3}
+  maxVolume: 0.3
 --- !u!1 &925269741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6385,6 +6407,9 @@ MonoBehaviour:
   throwInterval: 3.5
   lives: 3
   detectionRange: 6.6
+  deathSound: {fileID: 8300000, guid: c1fd68ae1a03a3841aae3d5949f8319a, type: 3}
+  soundDuration: 2.5
+  maxVolume: 0.2
 --- !u!95 &959144571
 Animator:
   serializedVersion: 5
@@ -6532,7 +6557,7 @@ Transform:
   m_GameObject: {fileID: 968365744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.545, y: 9.259, z: 0.7790017}
+  m_LocalPosition: {x: -10.58, y: 9.24, z: 0.7790017}
   m_LocalScale: {x: 1.2033, y: 1.2033, z: 1.2033}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6602,8 +6627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a10d197973712f40a8f32ce612455ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 2
-  duration: 20
+  speedMultiplier: 1.5
+  duration: 8
+  powerUpSound: {fileID: 8300000, guid: 76b630cbfd136b04c91c90d0fbca57e5, type: 3}
+  maxVolume: 0.05
 --- !u!61 &968365748
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7323,6 +7350,9 @@ MonoBehaviour:
   powerUpOffset: {x: 0, y: 2, z: 0}
   shootSound: {fileID: 8300000, guid: c796c48d1008cd447a5f59f20c9a498c, type: 3}
   shootVolume: 0.1
+  deathSound: {fileID: 8300000, guid: 6f866fa4489940b4a871987da1b89261, type: 3}
+  soundDuration: 2
+  maxVolume: 0.1
 --- !u!61 &1084141833
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7726,6 +7756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a248cf190d49554b86dff1d55c0838c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpSound: {fileID: 8300000, guid: 0ea046a535af5584c923f0988b08299a, type: 3}
+  soundDuration: 3.5
+  maxVolume: 0.3
 --- !u!61 &1100587390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8237,7 +8270,7 @@ Transform:
   m_GameObject: {fileID: 1141338734}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33.831444, y: -20.570812, z: -10}
+  m_LocalPosition: {x: -33.835052, y: -20.570812, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8439,7 +8472,7 @@ Transform:
   m_GameObject: {fileID: 1186337532}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.62, y: -8.35, z: -10}
+  m_LocalPosition: {x: -22.460001, y: -8.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10180,6 +10213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 10
+  powerUpSound: {fileID: 8300000, guid: 080fb8acda94ac047930d6f00f9980a0, type: 3}
+  maxVolume: 0.3
 --- !u!61 &1434024388
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11273,6 +11308,9 @@ MonoBehaviour:
   dashPowerUpChance: 1
   immortalityPowerUpChance: 0
   inmortalityPowerUpPrefab: {fileID: 354493701}
+  deathSound: {fileID: 8300000, guid: 73dee6c65e8a6634b9097d288a5eeea6, type: 3}
+  soundDuration: 2
+  maxVolume: 0.2
 --- !u!61 &1639880223
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12264,6 +12302,9 @@ MonoBehaviour:
   powerUpOffset: {x: 0, y: 2, z: 0}
   shootSound: {fileID: 8300000, guid: c796c48d1008cd447a5f59f20c9a498c, type: 3}
   shootVolume: 0.1
+  deathSound: {fileID: 8300000, guid: 6f866fa4489940b4a871987da1b89261, type: 3}
+  soundDuration: 2
+  maxVolume: 0.2
 --- !u!61 &1742363389
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13028,6 +13069,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a248cf190d49554b86dff1d55c0838c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpSound: {fileID: 8300000, guid: 0ea046a535af5584c923f0988b08299a, type: 3}
+  soundDuration: 5
+  maxVolume: 0.3
 --- !u!61 &1866298296
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13709,7 +13753,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1717471056}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 8
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -13876,7 +13920,7 @@ Transform:
   m_GameObject: {fileID: 1998657472}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.27, y: -6.23, z: -10}
+  m_LocalPosition: {x: -39.11, y: -6.23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

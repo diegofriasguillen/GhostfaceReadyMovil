@@ -24,6 +24,11 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
     private AudioSource audioSource;
     public float shootVolume = 0.1f;
 
+    //SoundDead
+    public AudioClip deathSound;
+    public float soundDuration = 3.5f;
+    public float maxVolume = 0.2f;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -99,11 +104,28 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
             Vector3 spawnPosition = transform.position + powerUpOffset;
             Instantiate(lifeExtraPrefab, spawnPosition, Quaternion.identity);
         }
+
+        PlayDeathSound();
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(shootingPoint.position, shootingRange);
+    }
+
+    private void PlayDeathSound()
+    {
+        if (deathSound != null)
+        {
+            GameObject audioSourceObject = new GameObject("DeathAudioSource");
+            AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSource.clip = deathSound;
+            audioSource.volume = maxVolume;
+
+            audioSource.Play();
+
+            Destroy(audioSourceObject, soundDuration);
+        }
     }
 }

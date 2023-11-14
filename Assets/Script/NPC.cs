@@ -23,6 +23,10 @@ public class NPC : MonoBehaviour
     public float immortalityPowerUpChance = 0.1f;
     public GameObject inmortalityPowerUpPrefab;
 
+    //Sound
+    public AudioClip deathSound;
+    public float soundDuration = 3.5f;
+    public float maxVolume = 0.2f;
 
     public void Start()
     {
@@ -69,6 +73,22 @@ public class NPC : MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + powerUpOffset;
             Instantiate(dashPowerUpPrefab, spawnPosition, Quaternion.identity);
+        }
+
+        PlayDeathSound();
+    }
+    private void PlayDeathSound()
+    {
+        if (deathSound != null)
+        {
+            GameObject audioSourceObject = new GameObject("DeathAudioSource");
+            AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSource.clip = deathSound;
+            audioSource.volume = maxVolume;
+
+            audioSource.Play();
+
+            Destroy(audioSourceObject, soundDuration);
         }
     }
 }

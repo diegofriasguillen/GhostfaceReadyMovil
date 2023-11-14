@@ -15,10 +15,12 @@ public class Patrol : MonoBehaviour
     public float maxVolume = 0.006f;
     public float minVolume = 0.001f;
 
+    private bool isGamePaused = false;
+
     void Start()
     {
-        audioSource = GetComponent<AudioSource>(); 
-        audioSource.volume = minVolume; 
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = minVolume;
 
         StartCoroutine(StartMovementDelay());
     }
@@ -67,9 +69,23 @@ public class Patrol : MonoBehaviour
         }
     }
 
-    //private void OnDisable()
-    //{
-    //    audioSource.Stop();
-    //    audioSource.enabled = false;
-    //}
+    public void SetGamePaused(bool paused)
+    {
+        isGamePaused = paused;
+        if (paused)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
+    }
+
+    private void OnDisable()
+    {
+        audioSource.Stop();
+        audioSource.enabled = false;
+    }
+
 }

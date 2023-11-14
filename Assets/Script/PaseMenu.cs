@@ -7,13 +7,18 @@ public class PaseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
-
+    [SerializeField] private List<Patrol> patrols;
 
     public void Pause()
     {
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
+
+        foreach (Patrol patrol in patrols)
+        {
+            patrol.SetGamePaused(true);
+        }
     }
 
     public void Continue()
@@ -21,6 +26,11 @@ public class PaseMenu : MonoBehaviour
         Time.timeScale = 1f;
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
+
+        foreach (Patrol patrol in patrols)
+        {
+            patrol.SetGamePaused(false);
+        }
     }
 
     public void Restart()

@@ -29,10 +29,14 @@ public class Ghostface : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    //Ataque fuaaaa
     public int attackDamage = 1;
     public LayerMask npcLayers;
     public Transform attackPoint;
     public float attackRange = 1f;
+    private bool canAttack = true;
+    public float attackCooldown = 0.2f;
+    private float timeSinceLastAttack = 0f;
 
     public int maxJumps = 1;
     private int currentJumps;
@@ -74,7 +78,7 @@ public class Ghostface : MonoBehaviour
     public GameObject Level2;
     public Transform RespawnPoint;
     public GameObject camerasObjectLevel1;
-    public GameObject camerasObjectLevel2;
+    //public GameObject camerasObjectLevel2;
 
     //DoubleDamage
     private bool hasDoubleDamage = false;
@@ -110,7 +114,6 @@ public class Ghostface : MonoBehaviour
         currentJumps = maxJumps;
 
         camerasObjectLevel1.SetActive(true);
-        camerasObjectLevel2.SetActive(false);
         Level1.SetActive(true);
         Level2.SetActive(false);
 
@@ -144,6 +147,15 @@ public class Ghostface : MonoBehaviour
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
+        //FUAAAA
+        if (entradasMovimiento.Movimiento.Ataque.ReadValue<float>() > 0 && canAttack)
+        {
+            Attack();
+            anim.SetTrigger("Kill");
+
+            // Inicia la cuenta regresiva del tiempo de recarga
+            StartCoroutine(AttackCooldown());
+        }
 
         if (entradasMovimiento.Movimiento.Salto.ReadValue<float>()>0 && !isJumping)
         {
@@ -229,6 +241,19 @@ public class Ghostface : MonoBehaviour
     {
         Attack();
         anim.SetTrigger("Kill");
+    }
+    private IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        timeSinceLastAttack = 0f;
+
+        while (timeSinceLastAttack < attackCooldown)
+        {
+            timeSinceLastAttack += Time.deltaTime;
+            yield return null;
+        }
+
+        canAttack = true;
     }
 
 
@@ -359,7 +384,6 @@ public class Ghostface : MonoBehaviour
         {
 
             camerasObjectLevel1.SetActive(false);
-            camerasObjectLevel2.SetActive(true);
 
             Level1.SetActive(false);
             Level2.SetActive(true);

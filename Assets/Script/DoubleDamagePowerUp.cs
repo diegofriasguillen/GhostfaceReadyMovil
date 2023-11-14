@@ -4,13 +4,39 @@ using UnityEngine;
 
 public class DoubleDamagePowerUp : MonoBehaviour
 {
+    public AudioClip powerUpSound; 
+    public float soundDuration = 5f; 
+    public float maxVolume = 0.3f; 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Ghostface player = collision.GetComponent<Ghostface>();
-            player.ActivateDoubleDamage();
-            Destroy(gameObject);
+
+            if (player != null)
+            {
+                player.ActivateDoubleDamage();
+
+                PlayPowerUpSound();
+
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void PlayPowerUpSound()
+    {
+        if (powerUpSound != null)
+        {
+            GameObject audioSourceObject = new GameObject("PowerUpAudioSource");
+            AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSource.clip = powerUpSound;
+            audioSource.volume = maxVolume;
+
+            audioSource.Play();
+
+            Destroy(audioSourceObject, soundDuration);
         }
     }
 }

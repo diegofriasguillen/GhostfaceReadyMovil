@@ -15,6 +15,12 @@ public class FootballPlayer : MonoBehaviour
     private Animator animator;
     private bool isAlive = true;
 
+
+    //SoundDead
+    public AudioClip deathSound;
+    public float soundDuration = 3.5f;
+    public float maxVolume = 0.2f;
+
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -69,7 +75,7 @@ public class FootballPlayer : MonoBehaviour
             rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
 
             Destroy(ball, 1f);
-            isThrowing = false; 
+            isThrowing = false;
         }
     }
 
@@ -111,11 +117,28 @@ public class FootballPlayer : MonoBehaviour
         isAlive = false;
         animator.SetTrigger("IsDead");
         GetComponent<Collider2D>().enabled = false;
+
+        PlayDeathSound();
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    private void PlayDeathSound()
+    {
+        if (deathSound != null)
+        {
+            GameObject audioSourceObject = new GameObject("DeathAudioSource");
+            AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSource.clip = deathSound;
+            audioSource.volume = maxVolume;
+
+            audioSource.Play();
+
+            Destroy(audioSourceObject, soundDuration);
+        }
     }
 }
