@@ -9,6 +9,11 @@ public class PaseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private List<Patrol> patrols;
 
+
+    public void Awake()
+    {
+       Time.timeScale = 0f;
+    }
     public void Pause()
     {
         Time.timeScale = 0f;
@@ -31,6 +36,11 @@ public class PaseMenu : MonoBehaviour
         {
             patrol.SetGamePaused(false);
         }
+    }
+
+    public void PlayButton()
+    {
+        Time.timeScale = 1f;
     }
 
     public void Restart()
