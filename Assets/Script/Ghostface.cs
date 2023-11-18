@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class Ghostface : MonoBehaviour
 {
-    public int lives = 3;
+    
     public GameObject[] lifeIcons;
 
     //ImmortalUI
@@ -16,7 +16,7 @@ public class Ghostface : MonoBehaviour
     public GameObject powerUpSliderObject;
 
     //SpeedUI
-    public Slider speedPowerUpSlider;                   
+    public Slider speedPowerUpSlider;
     public GameObject speedPowerUpSliderObject;
 
     //DashUI
@@ -78,7 +78,6 @@ public class Ghostface : MonoBehaviour
     public GameObject Level2;
     public Transform RespawnPoint;
     public GameObject camerasObjectLevel1;
-    //public GameObject camerasObjectLevel2;
 
     //DoubleDamage
     private bool hasDoubleDamage = false;
@@ -89,6 +88,9 @@ public class Ghostface : MonoBehaviour
     //FavScaryMovie
     public AudioClip startGameSound;
     private AudioSource startGameAudioSource;
+
+    //SaveSystem
+    public int lives = 3;
 
     public GameObject loseCanvas;
 
@@ -132,7 +134,6 @@ public class Ghostface : MonoBehaviour
     private void Update()
     {
 
-        //float moveX = Input.GetAxis("Horizontal");
         float moveX = entradasMovimiento.Movimiento.Horizontal.ReadValue<float>();
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
         anim.SetFloat("Speed", Mathf.Abs(moveX));
@@ -157,7 +158,7 @@ public class Ghostface : MonoBehaviour
             StartCoroutine(AttackCooldown());
         }
 
-        if (entradasMovimiento.Movimiento.Salto.ReadValue<float>()>0 && !isJumping)
+        if (entradasMovimiento.Movimiento.Salto.ReadValue<float>() > 0 && !isJumping)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isJumping = true;
@@ -218,7 +219,7 @@ public class Ghostface : MonoBehaviour
         }
 
         //Dash 
-        if (entradasMovimiento.Movimiento.Dashing.ReadValue<float>()>0 && !isDashing && hasDashPowerUp)
+        if (entradasMovimiento.Movimiento.Dashing.ReadValue<float>() > 0 && !isDashing && hasDashPowerUp)
         {
             StartCoroutine(DoDash());
         }
@@ -234,6 +235,7 @@ public class Ghostface : MonoBehaviour
         {
             isWallSliding = false;
         }
+
     }
 
     //InputActionSystem
@@ -387,6 +389,8 @@ public class Ghostface : MonoBehaviour
 
             Level1.SetActive(false);
             Level2.SetActive(true);
+
+        
 
             transform.position = RespawnPoint.position;
 
@@ -542,6 +546,7 @@ public class Ghostface : MonoBehaviour
     //Extralife
     public void AddLife()
     {
+
         if (lives < 5)
         {
             lives++;
@@ -549,6 +554,16 @@ public class Ghostface : MonoBehaviour
             {
                 lifeIcons[lives - 1].SetActive(true);
             }
+        }
+
+        UpdateLifeIcons();
+    }
+
+    public void UpdateLifeIcons()
+    {
+        for (int i = 0; i < lifeIcons.Length; i++)
+        {
+            lifeIcons[i].SetActive(i < lives);
         }
     }
 
