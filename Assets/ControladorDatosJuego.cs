@@ -43,9 +43,8 @@ public class ControladorDatosJuego : MonoBehaviour
             string contenido = File.ReadAllText(archivoDeGuardado);
             datosJuego = JsonUtility.FromJson<DatosJuego>(contenido);
 
-            Debug.Log("Posicion Jugador : " + datosJuego.posicion);
 
-            jugador.transform.position = datosJuego.posicion;
+            //jugador.transform.position = datosJuego.posicion;
             jugador.GetComponent<Ghostface>().lives = datosJuego.vida;
             jugador.GetComponent<Ghostface>().UpdateLifeIcons();
             knifes.GetComponent<Points>().points = datosJuego.savedKnifes;
@@ -63,7 +62,7 @@ public class ControladorDatosJuego : MonoBehaviour
     {
         DatosJuego nuevosDatos = new DatosJuego()
         {
-            posicion = jugador.transform.position,
+            //posicion = jugador.transform.position,
             vida = jugador.GetComponent<Ghostface>().lives,
             savedKnifes = knifes.GetComponent<Points>().points,
             kills = kills_.GetComponent<NPCPoints>().killing,

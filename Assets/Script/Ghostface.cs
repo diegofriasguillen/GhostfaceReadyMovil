@@ -79,6 +79,8 @@ public class Ghostface : MonoBehaviour
     public GameObject Level2;
     public Transform RespawnPoint;
     public GameObject camerasObjectLevel1;
+    public GameObject camerasObjectLevel2;
+    public GameObject camerasObjectLevel3;
     public GameObject Level3;
     public Transform RespawnPointLevel3;
     private int currentLevel = 1;
@@ -95,6 +97,11 @@ public class Ghostface : MonoBehaviour
 
     //SaveSystem
     public int lives = 3;
+
+    //mUSICAfONDO
+    public AudioClip backgroundMusic;
+    private AudioSource backgroundMusicAudioSource;
+
 
     public GameObject loseCanvas;
 
@@ -131,8 +138,15 @@ public class Ghostface : MonoBehaviour
         startGameAudioSource = gameObject.AddComponent<AudioSource>();
         startGameAudioSource.clip = startGameSound;
         startGameAudioSource.playOnAwake = false;
-        startGameAudioSource.volume = 0.2f; // Ajusta el volumen según sea necesario
+        startGameAudioSource.volume = 0.2f;
         PlayStartGameSound();
+
+        //musicaFondo
+        backgroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
+        backgroundMusicAudioSource.clip = backgroundMusic;
+        backgroundMusicAudioSource.loop = true;  
+        backgroundMusicAudioSource.volume = 0.05f; 
+        PlayBackgroundMusic();
 
 
     }
@@ -390,7 +404,8 @@ public class Ghostface : MonoBehaviour
 
         if (collision.gameObject.name == "meta")
         {
-
+            camerasObjectLevel1.SetActive(false);
+            camerasObjectLevel2.SetActive(true);
             Level1.SetActive(false);
             Level2.SetActive(true);
             currentLevel = 2;
@@ -400,6 +415,8 @@ public class Ghostface : MonoBehaviour
 
         else if (collision.gameObject.name == "meta2" && currentLevel == 2)
         {
+            camerasObjectLevel2.SetActive(false);
+            camerasObjectLevel3.SetActive(true);
             Level2.SetActive(false);
             Level3.SetActive(true);
             currentLevel = 3;
@@ -594,6 +611,14 @@ public class Ghostface : MonoBehaviour
         }
     }
 
+    //MusicaBackgroundddd
+    private void PlayBackgroundMusic()
+    {
+        if (backgroundMusic != null)
+        {
+            backgroundMusicAudioSource.Play();
+        }
+    }
     void Die()
     {
         Time.timeScale = 0;

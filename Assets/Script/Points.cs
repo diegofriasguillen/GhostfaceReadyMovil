@@ -18,6 +18,8 @@ public class Points : MonoBehaviour
     public int currentLevelIndex = 0;
     public float points;
 
+    private Dictionary<int, int> collectedPointsByLevel = new Dictionary<int, int>();
+
     private void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
@@ -26,8 +28,9 @@ public class Points : MonoBehaviour
 
     private void UpdatePointsText()
     {
-        // Muestra la cantidad actual de puntos y la meta del nivel
-        textMesh.text = points.ToString("0") + (" / ") + levelInfoList[currentLevelIndex].pointsToWin.ToString("0");
+        int collectedPoints = collectedPointsByLevel.ContainsKey(currentLevelIndex) ? collectedPointsByLevel[currentLevelIndex] : 0;
+
+        textMesh.text = collectedPoints.ToString("0") + (" / ") + levelInfoList[currentLevelIndex].pointsToWin.ToString("0");
     }
 
     private void Update()
@@ -35,49 +38,35 @@ public class Points : MonoBehaviour
         UpdatePointsText();
     }
 
-    public void AddPoints(float onCommingPoints)
+    public void AddPoints(float onComingPoints)
     {
-        points += onCommingPoints;
+        int currentCollectedPoints = collectedPointsByLevel.ContainsKey(currentLevelIndex) ? collectedPointsByLevel[currentLevelIndex] : 0;
+        currentCollectedPoints++;
 
-        if (points >= levelInfoList[currentLevelIndex].pointsToWin)
+        collectedPointsByLevel[currentLevelIndex] = currentCollectedPoints;
+        points += onComingPoints;
+
+        if (currentCollectedPoints >= levelInfoList[currentLevelIndex].pointsToWin)
         {
-            // Desactiva la condición de victoria en el nivel actual
             winCondition.gameObject.SetActive(false);
-
-            // Reinicia los puntos al ganar el nivel
             points = 0;
 
-            // Avanza al siguiente nivel
             currentLevelIndex++;
 
-            // Activa la condición de victoria en el nuevo nivel
             if (currentLevelIndex < levelInfoList.Count)
             {
                 winCondition.gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.LogWarning("Todos los niveles completados");
             }
         }
     }
 
     public void NextLevel()
     {
-        currentLevelIndex++; // Avanza al siguiente nivel
+        currentLevelIndex++;
 
-        // Asegúrate de que estás dentro de los límites del array
         if (currentLevelIndex < levelInfoList.Count)
         {
-            // Reinicia otros elementos relacionados con cambiar de nivel si es necesario
-
-            // Activa la condición de victoria en el nuevo nivel
             winCondition.gameObject.SetActive(true);
         }
-        else
-        {
-            Debug.LogWarning("Todos los niveles completados");
-        }
     }
-
 }
