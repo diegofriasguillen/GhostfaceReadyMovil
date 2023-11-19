@@ -8,4 +8,7 @@ public class DatosJuego
     public Vector3 posicion;
     public int vida;
     public float savedKnifes;
+    public float kills;
+    public float tiempoGuardado;
+    public float powerUpsRecolectados;
 }

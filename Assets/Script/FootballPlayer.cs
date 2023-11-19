@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class FootballPlayer : MonoBehaviour
 {
+    [SerializeField] private NPCPoints npcPoints;
+
     public GameObject ballPrefab;
     public float throwForce = 10f;
     public float throwInterval = 2f;
@@ -102,6 +104,7 @@ public class FootballPlayer : MonoBehaviour
 
             if (lives <= 0)
             {
+                npcPoints.KillNPC();
                 Die();
             }
         }

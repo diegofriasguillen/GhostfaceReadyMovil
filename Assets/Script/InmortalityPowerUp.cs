@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InmortalityPowerUp : MonoBehaviour
 {
+    [SerializeField] PowerUpsPoints powerUpsPoints;
+
     public float duration = 10f;
     public AudioClip powerUpSound;
     public float maxVolume = 0.3f;
@@ -16,13 +18,12 @@ public class InmortalityPowerUp : MonoBehaviour
 
             if (player != null)
             {
-                // Activa el power-up de inmortalidad en el jugador
                 StartCoroutine(ActivatePowerUp(player));
 
-                // Reproduce el sonido
                 PlayPowerUpSound();
 
-                // Destruye el objeto del power-up
+                powerUpsPoints.RecollectPowerUp();
+
                 Destroy(gameObject);
             }
         }

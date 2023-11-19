@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PoliceOfficer : MonoBehaviour
 {
+    [SerializeField] private NPCPoints npcPoints;
+
     public Transform shootingPoint;
     public GameObject bulletPrefab;
     public float shootingRange = 5f;
@@ -84,6 +86,7 @@ public class PoliceOfficer : MonoBehaviour
 
         if(policeLives <= 0)
         {
+            npcPoints.KillNPC();
             Die();
         }
     }

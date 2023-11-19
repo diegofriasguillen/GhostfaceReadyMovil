@@ -9,12 +9,17 @@ public class ControladorDatosJuego : MonoBehaviour
     public string archivoDeGuardado;
     public DatosJuego datosJuego = new DatosJuego();
     public GameObject knifes;
+    public GameObject kills_;
+    public GameObject tiempo;
+    public GameObject powerUps;
 
     private void Awake()
     {
         archivoDeGuardado = Application.dataPath + "/datosJuego.json";
         jugador = GameObject.FindGameObjectWithTag("Player");
         knifes = GameObject.FindGameObjectWithTag("KnifePoints");
+        kills_ = GameObject.FindGameObjectWithTag("Points");
+        tiempo = GameObject.FindGameObjectWithTag("Timer");
 
         CargarDatos();
     }
@@ -44,6 +49,9 @@ public class ControladorDatosJuego : MonoBehaviour
             jugador.GetComponent<Ghostface>().lives = datosJuego.vida;
             jugador.GetComponent<Ghostface>().UpdateLifeIcons();
             knifes.GetComponent<Points>().points = datosJuego.savedKnifes;
+            kills_.GetComponent<NPCPoints>().killing = datosJuego.kills;
+            tiempo.GetComponent<TimerController>().currentTime = datosJuego.tiempoGuardado;
+            
         }
         else
         {
@@ -57,7 +65,10 @@ public class ControladorDatosJuego : MonoBehaviour
         {
             posicion = jugador.transform.position,
             vida = jugador.GetComponent<Ghostface>().lives,
-            savedKnifes = knifes.GetComponent<Points>().points
+            savedKnifes = knifes.GetComponent<Points>().points,
+            kills = kills_.GetComponent<NPCPoints>().killing,
+            tiempoGuardado = tiempo.GetComponent<TimerController>().currentTime
+
         };
 
         string cadenaJSON = JsonUtility.ToJson(nuevosDatos); 

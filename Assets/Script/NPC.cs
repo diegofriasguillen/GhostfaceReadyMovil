@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    [SerializeField] private NPCPoints npcPoints;
+
     public int health = 1;
     public Animator anim;
 
@@ -28,6 +30,7 @@ public class NPC : MonoBehaviour
     public float soundDuration = 3.5f;
     public float maxVolume = 0.2f;
 
+
     public void Start()
     {
         anim = GetComponent<Animator>();
@@ -39,9 +42,11 @@ public class NPC : MonoBehaviour
         if(health <= 0 && !isDead)
         {
             Die();
+            npcPoints.KillNPC();
             isDead = true;
         }
     }
+
 
     void Die()
     {

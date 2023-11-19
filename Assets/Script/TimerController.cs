@@ -8,7 +8,7 @@ public class TimerController : MonoBehaviour
     public TextMeshProUGUI timerText;
     public GameObject timerObject;
     public float maxTime = 60f;
-    private float currentTime;
+    public float currentTime;
 
     public GameObject loseCanvas;
 

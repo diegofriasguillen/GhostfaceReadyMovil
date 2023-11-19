@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpeedPowerUp : MonoBehaviour
 {
+    [SerializeField] PowerUpsPoints powerUpsPoints;
+
     public float speedMultiplier = 2f;
     public float duration = 20f;
 
@@ -22,6 +24,8 @@ public class SpeedPowerUp : MonoBehaviour
                 StartCoroutine(ActivatePowerUp(player));
 
                 PlayPowerUpSound();
+
+                powerUpsPoints.RecollectPowerUp();
 
                 Destroy(gameObject);
             }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DashPowerUp : MonoBehaviour
 {
+    [SerializeField] PowerUpsPoints powerUpsPoints;
+
     public AudioClip powerUpSound;
     public float soundDuration = 5f;
     public float maxVolume = 0.3f;
@@ -19,6 +21,8 @@ public class DashPowerUp : MonoBehaviour
                 player.ActivateDash();
 
                 PlayPowerUpSound();
+
+                powerUpsPoints.RecollectPowerUp();
 
                 Destroy(gameObject);
             }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Ghostface : MonoBehaviour
 {
@@ -78,6 +79,9 @@ public class Ghostface : MonoBehaviour
     public GameObject Level2;
     public Transform RespawnPoint;
     public GameObject camerasObjectLevel1;
+    public GameObject Level3;
+    public Transform RespawnPointLevel3;
+    private int currentLevel = 1;
 
     //DoubleDamage
     private bool hasDoubleDamage = false;
@@ -118,6 +122,7 @@ public class Ghostface : MonoBehaviour
         camerasObjectLevel1.SetActive(true);
         Level1.SetActive(true);
         Level2.SetActive(false);
+        Level3.SetActive(false);
 
         //InputActionSystem
         entradasMovimiento.Movimiento.Ataque.performed += contexto => Ataque(contexto);
@@ -128,6 +133,7 @@ public class Ghostface : MonoBehaviour
         startGameAudioSource.playOnAwake = false;
         startGameAudioSource.volume = 0.2f; // Ajusta el volumen según sea necesario
         PlayStartGameSound();
+
 
     }
 
@@ -385,15 +391,27 @@ public class Ghostface : MonoBehaviour
         if (collision.gameObject.name == "meta")
         {
 
-            camerasObjectLevel1.SetActive(false);
-
             Level1.SetActive(false);
             Level2.SetActive(true);
-
-        
-
+            currentLevel = 2;
             transform.position = RespawnPoint.position;
 
+        }
+
+        else if (collision.gameObject.name == "meta2" && currentLevel == 2)
+        {
+            Level2.SetActive(false);
+            Level3.SetActive(true);
+            currentLevel = 3;
+
+            if (RespawnPointLevel3 != null)
+            {
+                transform.position = RespawnPointLevel3.position;
+            }
+            else
+            {
+                Debug.LogError("RespawnPointLevel3 no está configurado en el inspector.");
+            }
         }
 
 
