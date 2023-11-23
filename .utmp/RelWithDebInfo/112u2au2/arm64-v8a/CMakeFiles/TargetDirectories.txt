@@ -1,0 +1,5 @@
+D:/ARTEK/GhostfaceMovilPlaystore/.utmp/RelWithDebInfo/112u2au2/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/ARTEK/GhostfaceMovilPlaystore/.utmp/RelWithDebInfo/112u2au2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/ARTEK/GhostfaceMovilPlaystore/.utmp/RelWithDebInfo/112u2au2/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/ARTEK/GhostfaceMovilPlaystore/.utmp/RelWithDebInfo/112u2au2/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+D:/ARTEK/GhostfaceMovilPlaystore/.utmp/RelWithDebInfo/112u2au2/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

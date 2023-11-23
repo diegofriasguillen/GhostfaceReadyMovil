@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoliceOfficer_HorizontalShooting : MonoBehaviour
 {
+    [SerializeField] private PatrolNPCS _patrol;
     [SerializeField] private NPCPoints npcPoints;
 
     public Transform shootingPoint;
@@ -31,11 +32,18 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
     public float soundDuration = 3.5f;
     public float maxVolume = 0.2f;
 
+
     private void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = shootVolume;
+
+        //patrullar 
+        if (_patrol == null)
+        {
+            _patrol = GetComponent<PatrolNPCS>();
+        }
     }
 
     private void Update()
@@ -49,9 +57,17 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
 
         if (ghostfaceCollider && !isShooting)
         {
-            StartCoroutine(Shoot(ghostfaceCollider.transform));
-        }
+            Vector2 directionToGhostface = ghostfaceCollider.transform.position - transform.position;
 
+            FlipCharacterDirection(directionToGhostface.x);
+
+            StartCoroutine(Shoot(ghostfaceCollider.transform));
+
+            if (_patrol != null)
+            {
+                _patrol.StopPatrol();
+            }
+        }
     }
 
     private IEnumerator Shoot(Transform targetTransform)
@@ -59,9 +75,12 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
         isShooting = true;
         animator.SetTrigger("StartShooting");
 
-        Vector2 direction = new Vector2 (-1,0);
+        Debug.Log("Shooting from: " + shootingPoint.position);
 
-        Bullet bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity).GetComponent<Bullet>();
+        Vector2 direction = new Vector2(-1, 0);
+
+        GameObject bulletObject = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.SetDirection(direction);
 
         if (shootSound != null)
@@ -72,8 +91,6 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
         yield return new WaitForSeconds(shootingInterval);
         animator.ResetTrigger("StartShooting");
         isShooting = false;
-
-
     }
 
     public void TakeDamage(int damageAmount)
@@ -89,6 +106,15 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
         {
             npcPoints.KillNPC();
             Die();
+        }
+    }
+
+    private void FlipCharacterDirection(float targetDirectionX)
+    {
+        if ((targetDirectionX > 0 && transform.localScale.x < 0) ||
+            (targetDirectionX < 0 && transform.localScale.x > 0))
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -109,6 +135,14 @@ public class PoliceOfficer_HorizontalShooting : MonoBehaviour
         }
 
         PlayDeathSound();
+
+        //Patrullar
+        if (_patrol != null)
+        {
+            _patrol.enabled = false;
+        }
+
+
     }
 
     private void OnDrawGizmosSelected()

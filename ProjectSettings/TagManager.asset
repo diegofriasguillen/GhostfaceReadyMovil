@@ -59,11 +59,11 @@ TagManager:
   - name: FootballPlayer
     uniqueID: 2364057083
     locked: 0
-  - name: Police
-    uniqueID: 2175360945
-    locked: 0
   - name: Bullet
     uniqueID: 2611013809
+    locked: 0
+  - name: Police
+    uniqueID: 2175360945
     locked: 0
   - name: Ghostface
     uniqueID: 1421305841
