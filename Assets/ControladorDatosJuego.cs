@@ -24,6 +24,12 @@ public class ControladorDatosJuego : MonoBehaviour
         CargarDatos();
     }
 
+    private void Start()
+    {
+
+        SaveAll();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -35,7 +41,11 @@ public class ControladorDatosJuego : MonoBehaviour
             GuardarDatos();
         }
     }
+    public void SaveAll() {
 
+        Invoke("GuardarDatos", 60f);
+    
+    }
     private void CargarDatos()
     {
         if (File.Exists(archivoDeGuardado))
@@ -73,6 +83,10 @@ public class ControladorDatosJuego : MonoBehaviour
         string cadenaJSON = JsonUtility.ToJson(nuevosDatos); 
         File.WriteAllText(archivoDeGuardado, cadenaJSON);
         Debug.Log("Archivo Guardado");
+
+        
+
+        SaveAll();
     }
 
 

@@ -16,6 +16,7 @@ public class VictoryController : MonoBehaviour
             {
                 victoryPanel.SetActive(true);
             }
+            GooglePlayManager.instance.Report(GPGSIds.achievement_end_the_game);
         }
     }
 
